@@ -219,17 +219,18 @@ class ViewController: UIViewController {
                 if(array[0].number == array[1].number)
                 {array[0].frameNumber = array[1].frameNumber; needRemoveCubArray.append(array[0]); needChangeNumberArray.append(array[1])}
         case 3: array[2].frameNumber = num+change*3; array[1].frameNumber = num+change*2; array[0].frameNumber = num+change;
+                if(array[1].number == array[2].number)
+                {array[0].frameNumber = array[1].frameNumber; array[1].frameNumber = array[2].frameNumber; needRemoveCubArray.append(array[1]); needChangeNumberArray.append(array[2])}else
                 if(array[0].number == array[1].number)
                 {array[0].frameNumber = array[1].frameNumber; needRemoveCubArray.append(array[0]); needChangeNumberArray.append(array[1])}
+        case 4: if(array[2].number == array[3].number)
+                {array[0].frameNumber = array[1].frameNumber; array[1].frameNumber = array[2].frameNumber; array[2].frameNumber = array[3].frameNumber; needRemoveCubArray.append(array[2]); needChangeNumberArray.append(array[3])
+                    if(array[0].number == array[1].number)
+                    {array[0].frameNumber = array[1].frameNumber; needRemoveCubArray.append(array[0]); needChangeNumberArray.append(array[1])}}
                 else if(array[1].number == array[2].number)
                 {array[0].frameNumber = array[1].frameNumber; array[1].frameNumber = array[2].frameNumber; needRemoveCubArray.append(array[1]); needChangeNumberArray.append(array[2])}
-        case 4: if(array[0].number == array[1].number)
-                {array[0].frameNumber = array[1].frameNumber; needRemoveCubArray.append(array[0]); needChangeNumberArray.append(array[1])
-                    if(array[2].number == array[3].number){array[1].frameNumber = array[2].frameNumber; array[0].frameNumber = array[2].frameNumber; array[2].frameNumber = array[3].frameNumber; needRemoveCubArray.append(array[2]); needChangeNumberArray.append(array[3])}}
-                else if(array[1].number == array[2].number)
-                {array[0].frameNumber = array[1].frameNumber; array[1].frameNumber = array[2].frameNumber; needRemoveCubArray.append(array[1]); needChangeNumberArray.append(array[2])}
-                else if(array[2].number == array[3].number)
-                {array[0].frameNumber = array[1].frameNumber; array[1].frameNumber = array[2].frameNumber; array[2].frameNumber = array[3].frameNumber; needRemoveCubArray.append(array[2]); needChangeNumberArray.append(array[3])}
+                else if(array[0].number == array[1].number)
+                {array[0].frameNumber = array[1].frameNumber; needRemoveCubArray.append(array[0]); needChangeNumberArray.append(array[1])}
         default:break
         }
     }
