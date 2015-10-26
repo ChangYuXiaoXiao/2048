@@ -111,12 +111,16 @@ class ViewController: UIViewController {
         var array2 = array[1]
         var array3 = array[2]
         var array4 = array[3]
+        var preSubViewArray = [CYLCubView]()
+        var preSubViewFrameNumber = [Int]()
         //将各个列中有数字的方块分别放入对应数组
         for cubView in self.gameBackGround.subviews
         {
             if(cubView is CYLCubView)
             {
                 let cub = cubView as! CYLCubView
+                preSubViewArray.append(cub)
+                preSubViewFrameNumber.append(cub.frameNumber)
                 switch cub.frameNumber
                 {
                 case num1,(num1+change),(num1+change*2),(num1+change*3): array1.append(cub)
@@ -142,7 +146,7 @@ class ViewController: UIViewController {
             array4.sortInPlace({$0.frameNumber > $1.frameNumber})
         }
         //进行移动
-        UIView.animateWithDuration(0.2, animations: { () -> Void in
+        UIView.animateWithDuration(0.1, animations: { () -> Void in
             self.moveCub(array1, num: num1, change: change)
             self.moveCub(array2, num: num2, change: change)
             self.moveCub(array3, num: num3, change: change)
@@ -162,16 +166,25 @@ class ViewController: UIViewController {
                     for cub in self.needChangeNumberArray
                     {
                         cub.number *= 2
+                        UIView.animateWithDuration(0.05, animations: { () -> Void in
+                            cub.transform = CGAffineTransformMakeScale(1.3, 1.3)
+                            }, completion: { (True) -> Void in
+                                UIView.animateWithDuration(0.05, animations: { () -> Void in
+                                    cub.transform = CGAffineTransformIdentity
+                                })
+                        })
                     }
                     self.needChangeNumberArray.removeAll()
                 }
                 //遍历所有方块，去除到当前已经存在方块的位置，在未存在方块的位置上添加新的方块
                 var sparePositionArray = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+                var currentSubViewArray = [CYLCubView]()
                 for cubView in self.gameBackGround.subviews
                 {
                     if(cubView is CYLCubView)
                     {
                         let cub = cubView as! CYLCubView
+                        currentSubViewArray.append(cub)
                         for var num = 0; num < sparePositionArray.count; num++
                         {
                             if (sparePositionArray[num] == cub.frameNumber)
@@ -183,9 +196,31 @@ class ViewController: UIViewController {
                 }
                 if (sparePositionArray.count > 0)
                 {
-                    let cubView = CYLCubView.init()
-                    cubView.frameNumber = sparePositionArray[Int(arc4random())%sparePositionArray.count]
-                    self.gameBackGround.addSubview(cubView)
+                    var i = 0; var isMoved = false
+                    if (preSubViewArray.count == currentSubViewArray.count)
+                    {
+                        for cub in preSubViewArray
+                        {
+                            if(!(cub.isEqual(currentSubViewArray[i])))
+                            {
+                                isMoved = true; break
+                            }else if(!(preSubViewFrameNumber[i] == currentSubViewArray[i].frameNumber))
+                            {
+                                isMoved = true; break
+                            }
+                            i++
+                        }
+                    }else {isMoved = true}
+                    if (isMoved)
+                    {
+                        let cubView = (Int(arc4random())%2 == 0) ? CYLCubView.init():CYLCubView.init(number:4)
+                        cubView.frameNumber = sparePositionArray[Int(arc4random())%sparePositionArray.count]
+                        cubView.transform = CGAffineTransformMakeScale(0.01, 0.01)
+                        self.gameBackGround.addSubview(cubView)
+                        UIView.animateWithDuration(0.1, animations: { () -> Void in
+                            cubView.transform = CGAffineTransformIdentity
+                        })
+                    }
                     //Game Over条件
                     if (sparePositionArray.count == 1)
                     {
