@@ -10,9 +10,9 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet var gameBackGround: UIView!
-    var cubFrameArray:Array = [CGRect]()
-    var needRemoveCubArray = [CYLCubView]()
-    var needChangeNumberArray = [CYLCubView]()
+    var cubFrameArray:[CGRect] = [CGRect]()
+    var needRemoveCubArray:[CYLCubView] = [CYLCubView]()
+    var needChangeNumberArray:[CYLCubView] = [CYLCubView]()
     lazy var maskView:UIView? =
     {
         let maskView = UIView.init(frame: CGRectMake(0, 0, screenWidth, screenHeight))

@@ -14,7 +14,7 @@
 		3157BEFD1BD76AC900A323B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3157BEFB1BD76AC900A323B5 /* LaunchScreen.storyboard */; };
 		3157BF081BD76AC900A323B5 /* _048Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3157BF071BD76AC900A323B5 /* _048Tests.swift */; };
 		3157BF131BD76AC900A323B5 /* _048UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3157BF121BD76AC900A323B5 /* _048UITests.swift */; };
-		3157BF211BD76D4E00A323B5 /* CYLCubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3157BF201BD76D4E00A323B5 /* CYLCubView.swift */; settings = {ASSET_TAGS = (); }; };
+		3157BF211BD76D4E00A323B5 /* CYLCubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3157BF201BD76D4E00A323B5 /* CYLCubView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
